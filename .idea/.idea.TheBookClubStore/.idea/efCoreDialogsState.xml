@@ -3,7 +3,7 @@
   <component name="EfCoreDialogsState">
     <option name="keyValueStorage">
       <map>
-        <entry key="Common:buildConfiguration" value="Debug" />
+        <entry key="Common:buildConfiguration" value="Release" />
         <entry key="Common:dbContextFolder" value="Context" />
         <entry key="Common:dbContextName" value="TheBookClubStoreDbContext" />
         <entry key="Common:enableDiagnosticLogging" value="false" />
