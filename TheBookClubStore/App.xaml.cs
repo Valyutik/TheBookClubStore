@@ -1,7 +1,5 @@
-﻿namespace TheBookClubStore
+﻿namespace TheBookClubStore;
+
+public partial class App
 {
-    public partial class App
-    {
-        
-    }
 }

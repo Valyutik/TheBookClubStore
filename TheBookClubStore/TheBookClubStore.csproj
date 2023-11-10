@@ -9,12 +9,62 @@
 
     <ItemGroup>
       <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.13" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.13">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+      <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Windows\AuthorizationWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\ProductPhotos\Канцелярские товары 3.jpg" />
+      <Resource Include="Resources\ProductPhotos\Канцелярские товары 3.jpg" />
+      <None Remove="Resources\ProductPhotos\Канцелярские товары 4.jpg" />
+      <Resource Include="Resources\ProductPhotos\Канцелярские товары 4.jpg" />
+      <None Remove="Resources\ProductPhotos\Книга 1.jpg" />
+      <Resource Include="Resources\ProductPhotos\Книга 1.jpg" />
+      <None Remove="Resources\ProductPhotos\Книга 2.jpg" />
+      <Resource Include="Resources\ProductPhotos\Книга 2.jpg" />
+      <None Remove="Resources\ProductPhotos\Книга 3.jpg" />
+      <Resource Include="Resources\ProductPhotos\Книга 3.jpg" />
+      <None Remove="Resources\ProductPhotos\Книга 4.jpg" />
+      <Resource Include="Resources\ProductPhotos\Книга 4.jpg" />
+      <None Remove="Resources\ProductPhotos\Книга 5.jpg" />
+      <Resource Include="Resources\ProductPhotos\Книга 5.jpg" />
+      <None Remove="Resources\ProductPhotos\Книга 6.jpg" />
+      <Resource Include="Resources\ProductPhotos\Книга 6.jpg" />
+      <Resource Include="Resources\UserPhotos\Евгения Козлова.jpg" />
+      <None Remove="Resources\ProductPhotos\Канцелярские товары 1.jpg" />
+      <Resource Include="Resources\ProductPhotos\Канцелярские товары 1.jpg" />
+      <None Remove="Resources\ProductPhotos\Канцелярские товары 2.jpg" />
+      <Resource Include="Resources\ProductPhotos\Канцелярские товары 2.jpg" />
+      <None Remove="Resources\UserPhotos\Алексей Сидоров.jpg" />
+      <Resource Include="Resources\UserPhotos\Алексей Сидоров.jpg" />
+      <None Remove="Resources\UserPhotos\Анастасия Морозова.jpeg" />
+      <Resource Include="Resources\UserPhotos\Анастасия Морозова.jpeg" />
+      <None Remove="Resources\UserPhotos\Анна Кузнецова.jpg" />
+      <Resource Include="Resources\UserPhotos\Анна Кузнецова.jpg" />
+      <None Remove="Resources\UserPhotos\Владимир Смирнов.jpg" />
+      <Resource Include="Resources\UserPhotos\Владимир Смирнов.jpg" />
+      <None Remove="Resources\UserPhotos\Дмитрий Попов.jpeg" />
+      <Resource Include="Resources\UserPhotos\Дмитрий Попов.jpeg" />
+      <None Remove="Resources\UserPhotos\Иван Иванов.jpg" />
+      <Resource Include="Resources\UserPhotos\Иван Иванов.jpg" />
+      <None Remove="Resources\UserPhotos\Мария Петрова.jpg" />
+      <Resource Include="Resources\UserPhotos\Мария Петрова.jpg" />
+      <None Remove="Resources\UserPhotos\Ольга Титова.jpg" />
+      <Resource Include="Resources\UserPhotos\Ольга Титова.jpg" />
+      <None Remove="Resources\UserPhotos\Сергей Васильев.jpeg" />
+      <Resource Include="Resources\UserPhotos\Сергей Васильев.jpeg" />
     </ItemGroup>
 
 </Project>

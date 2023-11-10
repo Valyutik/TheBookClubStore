@@ -1,35 +1,32 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TheBookClubStore.Entities;
+using TheBookClubStore.Models.Entities;
 
-namespace TheBookClubStore.Context;
+namespace TheBookClubStore.Models;
 
-public partial class TheBookClubStoreDbContext : DbContext
+public sealed class TheBookClubStoreDbContext : DbContext
 {
     public TheBookClubStoreDbContext()
     {
+        Database.EnsureCreated();
     }
 
-    public TheBookClubStoreDbContext(DbContextOptions<TheBookClubStoreDbContext> options)
-        : base(options)
-    {
-    }
+    public DbSet<DeliveryPoint> DeliveryPoints { get; set; } = null!;
 
-    public virtual DbSet<DeliveryPoint> DeliveryPoints { get; set; }
+    public DbSet<Order> Orders { get; set; } = null!;
 
-    public virtual DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; } = null!;
 
-    public virtual DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<OrderStatus> OrderStatuses { get; set; } = null!;
 
-    public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
+    public DbSet<Product> Products { get; set; } = null!;
 
-    public virtual DbSet<Product> Products { get; set; }
+    public DbSet<Role> Roles { get; set; } = null!;
 
-    public virtual DbSet<Role> Roles { get; set; }
-
-    public virtual DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=TheBookClubStore;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder
+            .UseSqlServer("Server=localhost;Database=TheBookClubStore;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -155,9 +152,5 @@ public partial class TheBookClubStoreDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_User_Role");
         });
-
-        OnModelCreatingPartial(modelBuilder);
     }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
