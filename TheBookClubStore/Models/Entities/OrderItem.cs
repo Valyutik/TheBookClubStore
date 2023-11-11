@@ -1,6 +1,6 @@
 ﻿namespace TheBookClubStore.Models.Entities;
 
-public sealed class OrderItem
+public class OrderItem
 {
     public int Id { get; init; }
 
@@ -10,7 +10,7 @@ public sealed class OrderItem
 
     public int Quantity { get; init; }
 
-    public Order Order { get; init; } = null!;
+    public virtual Order Order { get; init; } = null!;
 
-    public Product Product { get; init; } = null!;
+    public virtual Product Product { get; init; } = null!;
 }

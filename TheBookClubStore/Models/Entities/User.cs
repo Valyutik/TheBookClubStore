@@ -2,7 +2,7 @@
 
 namespace TheBookClubStore.Models.Entities;
 
-public sealed class User
+public class User
 {
     public int Id { get; init; }
 
@@ -19,7 +19,7 @@ public sealed class User
     public int RoleId { get; init; }
 
     // ReSharper disable once CollectionNeverUpdated.Global
-    public ICollection<Order> Orders { get; init; } = new List<Order>();
+    public virtual ICollection<Order> Orders { get; init; } = new List<Order>();
 
-    public Role Role { get; init; } = null!;
+    public virtual Role Role { get; init; } = null!;
 }

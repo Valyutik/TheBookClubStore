@@ -13,6 +13,21 @@ namespace TheBookClubStore.ViewModels;
 public sealed class MainViewModel : INotifyPropertyChanged
 {
     public User User { get; }
+
+    private string _title;
+    public string Title
+    {
+        get => _title;
+        private set
+        {
+            _title = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string ProductNameFilter { get; set; }
+    public string ProductManufactureFilter { get; set; }
+
     public Product CurrentProduct { get; set; }
     public ObservableCollection<Product>? CurrentProducts
     {
@@ -27,6 +42,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
     public RelayCommand RemoveProductToCartCommand { get; }
     public RelayCommand ChangeTableDisplayTypeCommand { get; }
     public RelayCommand PlaceOrderCommand { get; }
+    public RelayCommand SearchCommand { get; }
     
     private ObservableCollection<Product>? _currentProducts;
     private ObservableCollection<Product>? Products { get; }
@@ -37,6 +53,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
     public MainViewModel(User user)
     {
         User = user;
+        Title = "Товары";
         _dbContext.Database.EnsureCreated();
         _dbContext.Products.Load();
         
@@ -48,6 +65,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
         RemoveProductToCartCommand = new RelayCommand(RemoveProductToCart);
         ChangeTableDisplayTypeCommand = new RelayCommand(ChangeTableDisplayType);
         PlaceOrderCommand = new RelayCommand(PlaceOrder);
+        SearchCommand = new RelayCommand(SetProductFilter);
         
         var window = new MainWindow
         {
@@ -56,15 +74,24 @@ public sealed class MainViewModel : INotifyPropertyChanged
         window.Show();
     }
 
+    private void SetProductFilter(object obj)
+    {
+        CurrentProducts = new ObservableCollection<Product>(_dbContext.Products.Where(product =>
+            EF.Functions.Like(product.Name, $"%{ProductNameFilter}%") &&
+            EF.Functions.Like(product.Manufacturer, $"%{ProductManufactureFilter}%")));
+    }
+
     private void ChangeTableDisplayType(object obj)
     {
         if (_isShoppingCart)
         {
             _isShoppingCart = false;
+            Title = "Товары";
             CurrentProducts = Products;
         }
         else
         {
+            Title = "Корзина";
             _isShoppingCart = true;
             CurrentProducts = ShoppingCart;
         }
@@ -146,7 +173,11 @@ public sealed class MainViewModel : INotifyPropertyChanged
 
     private void PlaceOrder(object obj)
     {
-        
+        if (ShoppingCart != null)
+        {
+            var window = new OrderPlacementWindow(User, _dbContext, ShoppingCart);
+            window.Show();
+        }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

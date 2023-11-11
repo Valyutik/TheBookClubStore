@@ -2,11 +2,11 @@
 
 namespace TheBookClubStore.Models.Entities;
 
-public sealed class OrderStatus
+public class OrderStatus
 {
     public int Id { get; init; }
 
     public string Name { get; init; } = null!;
 
-    public ICollection<Order> Orders { get; init; } = new List<Order>();
+    public virtual ICollection<Order> Orders { get; init; } = new List<Order>();
 }

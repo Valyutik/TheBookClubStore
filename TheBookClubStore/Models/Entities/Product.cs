@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace TheBookClubStore.Models.Entities;
 
-public sealed class Product : INotifyPropertyChanged
+public class Product : INotifyPropertyChanged
 {
     public int Id { get; init; }
 
@@ -31,7 +31,7 @@ public sealed class Product : INotifyPropertyChanged
     public string? Photo { get; init; }
 
     // ReSharper disable once CollectionNeverUpdated.Global
-    public ICollection<OrderItem> OrderItems { get; init; } = new List<OrderItem>();
+    public virtual ICollection<OrderItem> OrderItems { get; init; } = new List<OrderItem>();
 
     private int _quantity;
 

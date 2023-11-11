@@ -2,7 +2,7 @@
 
 namespace TheBookClubStore.Models.Entities;
 
-public sealed class DeliveryPoint
+public class DeliveryPoint
 {
     public int Id { get; init; }
 
@@ -11,5 +11,5 @@ public sealed class DeliveryPoint
     public string Address { get; init; } = null!;
 
     // ReSharper disable once CollectionNeverUpdated.Global
-    public ICollection<Order> Orders { get; init; } = new List<Order>();
+    public virtual ICollection<Order> Orders { get; init; } = new List<Order>();
 }

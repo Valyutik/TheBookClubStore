@@ -13,6 +13,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:converters="clr-namespace:TheBookClubStore.ValueConverters"
         xmlns:vm="clr-namespace:TheBookClubStore.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:MainViewModel}"
         Title="Магазин &quot;Книжный клуб&quot;" Height="768" Width="1360"
         WindowState="Maximized">
@@ -28,7 +29,7 @@
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </Window.Resources>
-    <Grid  Background="White" ShowGridLines="True">
+    <Grid  Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.15*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -37,7 +38,7 @@
         
         <Grid Background="#ffdadada">
             <Grid Grid.Row="0">
-                <TextBlock Text="Товары" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center"
+                <TextBlock Text="{Binding Title}" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Margin="10"/>
             </Grid>
             <StackPanel Grid.Row="0" HorizontalAlignment="Right" Orientation="Horizontal">
@@ -56,7 +57,7 @@
         
         <Grid Grid.Row="1" Grid.Column="0">
             <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding CurrentProduct, Mode=OneWayToSource}"
-                      Margin="5" ItemsSource="{Binding CurrentProducts}">
+                      Margin="5" ItemsSource="{Binding CurrentProducts, UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     
                     <DataGridTemplateColumn Header="Фото" CanUserResize="False" CanUserSort="False">
@@ -105,16 +106,33 @@
             </DataGrid>
         </Grid>
         
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Margin="5"
-                    Command="{Binding ChangeTableDisplayTypeCommand}">
-                <materialDesign:PackIcon Kind="Cart"/>
-            </Button>
-            <Button Margin="5"
-                    Command="{Binding }">
-                <materialDesign:PackIcon Kind="ClipboardCheck" />
-            </Button>
-        </StackPanel>
+        <Grid Grid.Row="2" Background="#ffdadada">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Margin="5"
+                        Command="{Binding SearchCommand}">
+                    <materialDesign:PackIcon Kind="Search"/>
+                </Button>
+                <Button Margin="5"
+                        Command="{Binding ChangeTableDisplayTypeCommand}">
+                    <materialDesign:PackIcon Kind="Cart"/>
+                </Button>
+                <Button Margin="5"
+                        Command="{Binding PlaceOrderCommand}">
+                    <materialDesign:PackIcon Kind="ClipboardCheck" />
+                </Button>
+            </StackPanel>
+        
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBox Margin="10" Text="{Binding ProductNameFilter, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                         materialDesign:HintAssist.Hint="Название товара"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         Width="200" />
+                <TextBox Margin="10" Text="{Binding ProductManufactureFilter, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                         materialDesign:HintAssist.Hint="Производитель"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         Width="200" />
+            </StackPanel>
+        </Grid>
         
     </Grid>
 </Window>

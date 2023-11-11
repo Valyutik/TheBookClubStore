@@ -5,11 +5,6 @@ namespace TheBookClubStore.Models;
 
 public sealed class TheBookClubStoreDbContext : DbContext
 {
-    public TheBookClubStoreDbContext()
-    {
-        Database.EnsureCreated();
-    }
-
     public DbSet<DeliveryPoint> DeliveryPoints { get; set; } = null!;
 
     public DbSet<Order> Orders { get; set; } = null!;
@@ -25,8 +20,9 @@ public sealed class TheBookClubStoreDbContext : DbContext
     public DbSet<User> Users { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder
-            .UseSqlServer("Server=localhost;Database=TheBookClubStore;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseLazyLoadingProxies()
+            .UseSqlServer("Server=localhost;Database=TheBookClubStore;" +
+                          "Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
